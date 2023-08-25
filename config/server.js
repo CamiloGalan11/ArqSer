@@ -1,14 +1,16 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import router from "../routes/index.routes.js";
+import { exports } from './default.js';
+import pgService from '../services/pg.services.js';
 
 export default class Server {
     constructor(){
         this.app = express();
-        this.port = 8080;
+        this.port = exports.port;
     }
-    connectionDB(){
-
+    async connectionDB(){
+        new pgService();
     }
     middleware(){
         this.app.use(bodyParser.json());
